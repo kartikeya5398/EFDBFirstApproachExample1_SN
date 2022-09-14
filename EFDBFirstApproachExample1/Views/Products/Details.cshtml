@@ -1,0 +1,69 @@
+﻿
+@model EFDBFirstApproachExample1.Models.Product
+@{
+    ViewBag.Title = "Product Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Product Details</h2>
+
+
+<table class="table">
+
+    <tr>
+        <th>Product ID</th>
+        <td>@Model.ProductID</td>
+    </tr>
+
+    <tr>
+        <th>Product Name</th>
+        <td>@Model.ProductName</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>
+            @if (Model.Price != null)
+            {
+                @Model.Price.Value.ToString("C")
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Date Of Purchase</th>
+        <td>
+            @if (Model.DateOfPurchase != null)
+            {
+                 @Model.DateOfPurchase.Value.ToString("d/M/yyyy")
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Availability</th>
+        <td>@Model.AvailabilityStatus</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>
+            @if (Model.Category != null)
+            {
+                @Model.Category.CategoryName
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Brand</th>
+        <td>
+            @if (Model.Brand != null)
+            {
+                @Model.Brand.BrandName
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Active</th>
+        <td>@Model.Active</td>
+    </tr>
+
+</table>
+
+<a href="/products/index">Back To Products</a>
