@@ -125,13 +125,35 @@ namespace EFDBFirstApproachExample1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product p,HttpPostedFileBase image)
+        public ActionResult Create(Product p)
         {
             EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
 
+            
+                if (Request.Files.Count >= 1)
+                {
+                    var imgBytes = new Byte[] { };
+                    try
+                    {
+                        var file = Request.Files[0];
+                        imgBytes = new Byte[file.ContentLength + 1];
+                        file.InputStream.Read(imgBytes, 0, file.ContentLength);
+                        var stringImage = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
+                        p.Photo = stringImage;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        /*imgBytes = new Byte[file.ContentLength + 1];
+                        file.InputStream.Read(imgBytes, 0, file.ContentLength);*/
+                    }
+                }
+                db.Products.Add(p);
+                db.SaveChanges();
+                return RedirectToAction("Index");
 
-
-            if (Request.Files.Count >= 1)
+           
+            /*if (Request.Files.Count >= 1)
             {
                 var file = Request.Files[0];
                 var imgBytes = new Byte[file.ContentLength - 1];
@@ -139,10 +161,8 @@ namespace EFDBFirstApproachExample1.Controllers
                 var stringImage = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                 p.Photo = stringImage;
 
-            }
-            db.Products.Add(p);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            }*/
+            
         }
 
         public ActionResult Edit(long id)
@@ -166,6 +186,26 @@ namespace EFDBFirstApproachExample1.Controllers
             existingProduct.BrandID = p.BrandID;
             existingProduct.AvailabilityStatus = p.AvailabilityStatus;
             existingProduct.Active = p.Active;
+
+            if (Request.Files.Count >= 1)
+            {
+                var imgBytes = new Byte[] { };
+                try
+                {
+                    var file = Request.Files[0];
+                    imgBytes = new Byte[file.ContentLength + 1];
+                    file.InputStream.Read(imgBytes, 0, file.ContentLength);
+                    var stringImage = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
+                    existingProduct.Photo = stringImage;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    /*imgBytes = new Byte[file.ContentLength + 1];
+                    file.InputStream.Read(imgBytes, 0, file.ContentLength);*/
+                }
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index", "Products");
         }

@@ -11,16 +11,39 @@ namespace EFDBFirstApproachExample1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
+        [Key]
+        [Display(Name ="ProductID")]
         public long ProductID { get; set; }
+
+        [Display(Name = "ProductName")]
+        [Required]
         public string ProductName { get; set; }
+
+        [Display(Name = "Price")]
+        [Required]
         public Nullable<decimal> Price { get; set; }
+
+        [Display(Name = "Date Of Purchase")]
+        [Required]
         public Nullable<System.DateTime> DateOfPurchase { get; set; }
+
+        [Display(Name = "Availability Status")]
+        [Required]
         public string AvailabilityStatus { get; set; }
+
+        [Display(Name = "CategoryID")]
+        [Required]
         public Nullable<long> CategoryID { get; set; }
+
+        [Display(Name = "BrandID")]
+        [Required]
         public Nullable<long> BrandID { get; set; }
+
+        [Display(Name = "Active")]
         public Nullable<bool> Active { get; set; }
         public string Photo { get; set; }
     

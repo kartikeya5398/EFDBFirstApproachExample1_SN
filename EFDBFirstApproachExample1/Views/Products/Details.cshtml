@@ -33,7 +33,7 @@
         <td>
             @if (Model.DateOfPurchase != null)
             {
-                 @Model.DateOfPurchase.Value.ToString("d/M/yyyy")
+                @Model.DateOfPurchase.Value.ToString("d/M/yyyy")
             }
         </td>
     </tr>
@@ -66,4 +66,5 @@
 
 </table>
 
-<a href="/products/index">Back To Products</a>
+@Html.ActionLink("Edit", "Edit", new { id=Model.ProductID }, new { @class = "btn btn-success btnStyle" })
+@Html.ActionLink("Back To List", "index", new { controller = "products" }, new { @class = "btn btn-primary btnStyle" })
