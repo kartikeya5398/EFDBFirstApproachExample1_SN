@@ -6,11 +6,15 @@
 
 <h2>Products</h2>
 
-<a href="/products/create">Create</a>
+<br />
+@Html.ActionLink("CREATE NEW", "Create", new { controller = "Products" }, new { @class = "btn btn-primary btnStyle" })
+<br />
 
 <form class="form-inline" action="/products/index">
-    <label for="search" class="mr-1">Search :</label>
-    <input type="search" class="form-control mr-1" id="search" name="search" placeholder="Search" value="@ViewBag.search" />
+    @Html.Label("Search", new { @class = "mr-1" })
+    @*<label for="search" class="mr-1">Search :</label>*@
+    @Html.TextBox("Search", ViewBag.search as string, new { @class = "form-control", placeholder = "search" })
+    @*<input type="search" class="form-control mr-1" id="search" name="search" placeholder="Search" value="@ViewBag.search" />*@
     <button type="submit" class="btn btn-primary">GO</button>
 
 </form>
@@ -23,7 +27,7 @@
             Photo
         </th>
 
-        <th style="width:10%">
+        <th style="width:8%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=ProductID&IconClass=fa-sort-asc&PageNo=1">ProductID</a>
@@ -42,7 +46,7 @@
             }
 
         </th>
-        <th style="width:25%">
+        <th style="width:13%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=ProductName&IconClass=fa-sort-asc&PageNo=1">ProductName</a>
@@ -60,7 +64,7 @@
                 }
             }
         </th>
-        <th style="width:10%">
+        <th style="width:8%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=Price&IconClass=fa-sort-asc&PageNo=1">Price</a>
@@ -96,7 +100,7 @@
                 }
             }
         </th>
-        <th style="width:10%">
+        <th style="width:8%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=AvailabilityStatus&IconClass=fa-sort-asc&PageNo=1">AvailabilityStatus</a>
@@ -114,7 +118,7 @@
                 }
             }
         </th>
-        <th style="width:10%">
+        <th style="width:8%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=CategoryID&IconClass=fa-sort-asc&PageNo=1">Category</a>
@@ -132,7 +136,7 @@
                 }
             }
         </th>
-        <th style="width:10%">
+        <th style="width:8%">
             @if (ViewBag.iconClass == "fa-sort-desc")
             {
                 <a href="/products/index?SortColumn=BrandID&IconClass=fa-sort-asc&PageNo=1">Brand</a>
@@ -150,52 +154,41 @@
                 }
             }
         </th>
-        <th style="width:5%">Active</th>
-        <th style="width:10%"></th>
+        <th style="width:8%">Active</th>
+        <th style="width:20%"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td><img src="data:image;base64,@item.Photo" width="130px"/></td>
-            <td>@item.ProductID</td>
-            <td>@item.ProductName</td>
+            <td><img src="data:image;base64,@item.Photo" width="130px" /></td>
+            <td>@Html.DisplayFor(temp => item.ProductID)</td>
+            <td>@Html.DisplayFor(temp => item.ProductName)</td>
 
             <td>
-                @if (item.Price != null)
-                {
-                    <span>@item.Price.Value.ToString("C")</span>
-                }
+                @Html.DisplayFor(temp => item.Price)
             </td>
 
             <td>
-                @if (item.DateOfPurchase != null)
-                {
-                    <span> @item.DateOfPurchase.Value.ToString("d/M/yyyy")</span>
-                }
+                @Html.DisplayFor(temp => item.DateOfPurchase)
             </td>
 
-            <td>@item.AvailabilityStatus</td>
+            <td>@Html.DisplayFor(temp => item.AvailabilityStatus)</td>
 
-            <td>
-                @if (item.Category != null)
-                {
-                    <span>@item.Category.CategoryName</span>
-                }
-            </td>
+            <td>@Html.DisplayFor(temp => item.Category.CategoryName)</td>
 
-            <td>
-                @if (item.Brand != null)
-                {
-                    <span>@item.Brand.BrandName</span>
-                }
-            </td>
+            <td>@Html.DisplayFor(temp => item.Brand.BrandName)</td>
 
-            <td>@item.Active</td>
+            <td>@Html.DisplayFor(temp => item.Active)</td>
             <td>
-                <a href="/products/details/@item.ProductID">Details</a>
-                <a href="/products/edit/@item.ProductID">Edit</a>
-                <a href="/products/delete/@item.ProductID">Delete</a>
+
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID, controller = "Products" }, new { @class = "btn btn-primary btnStyle" }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID, controller = "Products" }, new { @class = "btn btn-success btnStyle" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID, controller = "Products" }, new { @class = "btn btn-danger btnStyle" })
+
+                @*<a href="/products/details/@item.ProductID">Details</a>
+                    <a href="/products/edit/@item.ProductID">Edit</a>
+                    <a href="/products/delete/@item.ProductID">Delete</a>*@
             </td>
         </tr>
     }

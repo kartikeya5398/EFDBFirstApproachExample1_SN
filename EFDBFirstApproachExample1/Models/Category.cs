@@ -11,7 +11,7 @@ namespace EFDBFirstApproachExample1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +20,11 @@ namespace EFDBFirstApproachExample1.Models
             this.Products = new HashSet<Product>();
         }
     
+        [Key]
+        [Display(Name = "CategoryID")]
         public long CategoryID { get; set; }
+
+        [Display(Name = "CategoryName")]
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
