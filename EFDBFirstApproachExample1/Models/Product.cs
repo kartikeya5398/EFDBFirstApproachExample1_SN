@@ -12,35 +12,42 @@ namespace EFDBFirstApproachExample1.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using EFDBFirstApproachExample1.CustomValidation;
 
     public partial class Product
     {
         [Key]
         [Display(Name ="ProductID")]
+        
         public long ProductID { get; set; }
 
         [Display(Name = "ProductName")]
-        [Required]
+        [Required(ErrorMessage = "Product Name Required")]
+        [RegularExpression(@"^[A-Za-z ]*$",ErrorMessage ="Alphabets Only")]
+        [MaxLength(50,ErrorMessage ="Product Name should not be more than 50 Characters")]
+        [MinLength(2,ErrorMessage ="Product Name contains at least 2 characters")]
         public string ProductName { get; set; }
 
         [Display(Name = "Price")]
-        [Required]
+        [Required(ErrorMessage = "Price must be Required")]
+        [Range(0,100000,ErrorMessage ="Price should be in between 0 and 100000")]
+        [DivisibleBy10(ErrorMessage ="Price should be in Multiple of 10")]
         public Nullable<decimal> Price { get; set; }
 
         [Display(Name = "Date Of Purchase")]
-        [Required]
+        [Required(ErrorMessage = "Date Of Purchase Required")]
         public Nullable<System.DateTime> DateOfPurchase { get; set; }
 
         [Display(Name = "Availability Status")]
-        [Required]
+        [Required(ErrorMessage = "Please Select AvailabilityStatus")]
         public string AvailabilityStatus { get; set; }
 
         [Display(Name = "CategoryID")]
-        [Required]
+        [Required(ErrorMessage = "CategoryID Required")]
         public Nullable<long> CategoryID { get; set; }
 
         [Display(Name = "BrandID")]
-        [Required]
+        [Required(ErrorMessage = "BrandID Required")]
         public Nullable<long> BrandID { get; set; }
 
         [Display(Name = "Active")]
