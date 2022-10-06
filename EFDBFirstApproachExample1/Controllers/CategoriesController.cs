@@ -12,7 +12,8 @@ namespace EFDBFirstApproachExample1.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            CompanyDbContext db = new CompanyDbContext();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             List<Category> categories =db.Categories.ToList();
             return View(categories);
         }

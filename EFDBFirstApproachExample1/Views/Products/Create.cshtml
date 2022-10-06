@@ -34,7 +34,9 @@
 
         <div class="form-group col-md-6">
             @Html.LabelFor(temp => temp.AvailabilityStatus, new { @class = "form-check-label" })
+            <br />
             @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "InStock", new { @class = "form-check-input" })InStock
+            <br />
             @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "OutOfStock", new { @class = "form-check-input" })Out Of Stock
             <br />
             @Html.ValidationMessageFor(temp => temp.AvailabilityStatus)

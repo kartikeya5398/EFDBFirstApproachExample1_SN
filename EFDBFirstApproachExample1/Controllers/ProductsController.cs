@@ -9,10 +9,11 @@ namespace EFDBFirstApproachExample1.Controllers
 {
     public class ProductsController : Controller
     {
+        CompanyDbContext db = new CompanyDbContext();
         // GET: Products
         public ActionResult Index(string search="", string SortColumn = "ProductName", string IconClass = "fa-sort-asc", int PageNo = 1)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             ViewBag.search = search;
             List<Product> products = db.Products.Where(temp => temp.ProductName.Contains(search)).ToList();
 
@@ -111,14 +112,14 @@ namespace EFDBFirstApproachExample1.Controllers
 
         public ActionResult Details(long id)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             Product p=db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
             return View(p);
         }
 
         public ActionResult Create()
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             ViewBag.categories = db.Categories.ToList();
             ViewBag.brands = db.Brands.ToList();
             return View();
@@ -127,7 +128,7 @@ namespace EFDBFirstApproachExample1.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include ="ProductID,ProductName,Price,DateOfPurchase,AvailabilityStatus,CategoryID,BrandID,Active,Photo")]Product p)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
 
             if (ModelState.IsValid)
             {
@@ -175,7 +176,7 @@ namespace EFDBFirstApproachExample1.Controllers
 
         public ActionResult Edit(long id)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
             ViewBag.category = db.Categories.ToList();
             ViewBag.brands = db.Brands.ToList();
@@ -185,7 +186,7 @@ namespace EFDBFirstApproachExample1.Controllers
         [HttpPost]
         public ActionResult Edit(Product p)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             Product existingProduct = db.Products.Where(temp => temp.ProductID == p.ProductID).FirstOrDefault();
             existingProduct.ProductName = p.ProductName;
             existingProduct.Price = p.Price;
@@ -220,7 +221,7 @@ namespace EFDBFirstApproachExample1.Controllers
 
         public ActionResult Delete(long id)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
             return View(existingProduct);
         }
@@ -228,7 +229,7 @@ namespace EFDBFirstApproachExample1.Controllers
         [HttpPost]
         public ActionResult Delete(long id, Product p)
         {
-            EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
+            //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
             Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
             db.Products.Remove(existingProduct);
             db.SaveChanges();

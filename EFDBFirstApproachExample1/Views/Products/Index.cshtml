@@ -164,21 +164,11 @@
             <td><img src="data:image;base64,@item.Photo" width="130px" /></td>
             <td>@Html.DisplayFor(temp => item.ProductID)</td>
             <td>@Html.DisplayFor(temp => item.ProductName)</td>
-
-            <td>
-                @Html.DisplayFor(temp => item.Price)
-            </td>
-
-            <td>
-                @Html.DisplayFor(temp => item.DateOfPurchase)
-            </td>
-
+            <td>@Html.DisplayFor(temp => item.Price)</td>
+            <td>@Html.DisplayFor(temp => item.DateOfPurchase)</td>
             <td>@Html.DisplayFor(temp => item.AvailabilityStatus)</td>
-
             <td>@Html.DisplayFor(temp => item.Category.CategoryName)</td>
-
             <td>@Html.DisplayFor(temp => item.Brand.BrandName)</td>
-
             <td>@Html.DisplayFor(temp => item.Active)</td>
             <td>
 
