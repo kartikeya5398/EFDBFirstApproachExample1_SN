@@ -32,7 +32,7 @@ namespace EFDBFirstApproachExample1.Models
         [Display(Name = "Date Of Purchase")]
         //[Required(ErrorMessage = "Date Of Purchase Required")]
         [Column("DateOfPurchase", TypeName="datetime")]
-        //[DisplayFormat(DataFormatString = "M/d/yyyy", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "d/M/yyyy", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateOfPurchase { get; set; }
 
         [Display(Name = "Availability Status")]

@@ -39,7 +39,7 @@ namespace EFDBFirstApproachExample1
             if (userManager.FindByName("admin") == null)
             {
                 var user = new ApplicationUser();
-                user.UserName = "admin";
+                user.UserName = "Admin";
                 user.Email = "admin@gmail.com";
                 string userPassword = "admin123";
                 var chkUser = userManager.Create(user, userPassword);
@@ -62,7 +62,7 @@ namespace EFDBFirstApproachExample1
             if (userManager.FindByName("manager") == null)
             {
                 var user = new ApplicationUser();
-                user.UserName = "manager";
+                user.UserName = "Manager";
                 user.Email = "manager@gmail.com";
                 string userPassword = "manager123";
                 var chkUser = userManager.Create(user, userPassword);
