@@ -1,21 +1,23 @@
 ﻿@model EFDBFirstApproachExample1.Models.Product
 @using EFDBFirstApproachExample1.HtmlHelpers
 
+
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
 }
 
-<h2>Create Product</h2>
+<h2>Edit Product</h2>
 
-@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
-
+@using (Html.BeginForm("Edit", "Products", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(temp =>temp.ProductID)
+    @*<form action="/products/edit/@Model.ProductID" method="post">*@
     <div class="form-row">
         <div class="form-group col-md-6">
             @Html.LabelFor(temp => temp.ProductName)
             @Html.TextBoxFor(temp => temp.ProductName, new { placeholder = "ProductName", @class = "form-control" })
-            @Html.ValidationMessageFor(temp =>temp.ProductName)
+            @Html.ValidationMessageFor(temp => temp.ProductName)
         </div>
 
         <div class="form-group col-md-6">
@@ -42,9 +44,9 @@
             @Html.ValidationMessageFor(temp => temp.AvailabilityStatus)
             <br />
             @*@Html.DropDownListFor(temp => temp.AvailabilityStatus,new List<SelectListItem>() {
-        new SelectListItem(){Text="In Stock",Value="InStock"},
-        new SelectListItem(){Text="Out Of Stock",Value="OutOfStock"}
-        },"Please Select",new {@class="form-control"})
+                new SelectListItem(){Text="In Stock",Value="InStock"},
+                new SelectListItem(){Text="Out Of Stock",Value="OutOfStock"}
+                },"Please Select",new {@class="form-control"})
             *@
 
         </div>
@@ -54,7 +56,7 @@
         <div class="form-group col-md-6">
 
             @Html.LabelFor(temp => temp.CategoryID)
-            @Html.DropDownListFor(temp => temp.CategoryID, new SelectList(ViewBag.categories, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
+            @Html.DropDownListFor(temp => temp.CategoryID, new SelectList(ViewBag.category, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
             @Html.ValidationMessageFor(temp => temp.CategoryID)
 
         </div>
@@ -72,20 +74,31 @@
         </div>
     </div>
 
+    <!--<Div class="form-group">
+        <div class="form-check">-->
+    @*@Html.CheckBoxFor(temp => temp.Active.Value, new { @class = "form-check-input", value = true })
+        @Html.LabelFor(temp => temp.Active, new { @class = "form-check-label" })*@
+    <!--<input type="checkbox" class="form-check-input" id="Active" name="Active" checked="@Model.Active" value="true" />
+            <label for="Active" class="form-check-label">Active</label>
+            @Html.ValidationMessageFor(temp => temp.Photo)
+        </div>
+    </Div>-->
     <Div class="form-group">
         <div class="form-check">
-            @Html.CheckBoxFor(temp => temp.Active.Value, new { @class = "form-check-input", value = true })
-            @Html.LabelFor(temp => temp.Active, new { @class = "form-check-label" })
-            @Html.ValidationMessageFor(temp => temp.Active)
+            <input type="checkbox" class="form-check-input" id="Active" name="Active" checked="@Model.Active" value="true" />
+            <label for="Active" class="form-check-label">Active</label>
         </div>
     </Div>
 
     @Html.ValidationSummary()
-    <button type="submit" class="btn btn-success">SAVE</button>
-    @Html.ActionLink("CANCEL", "index", new { controller = "Products" }, new { @class = "btn btn-primary btnStyle" })
-    @*<a class="btn btn-danger" href="/products/index">CANCEL</a>*@
+    <button type="submit" class="btn btn-success">UPDATE</button>
+    @*@Html.ActionLink("CANCEL", "index", new { controller = "Products" }, new { @class = "btn btn-primary btnStyle" })*@
+    <a class="btn btn-primary" href="/admin/products/index">CANCEL</a>
+
 
 
 
 }
+
+
 

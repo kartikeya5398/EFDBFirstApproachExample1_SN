@@ -2,7 +2,7 @@
 @model EFDBFirstApproachExample1.Models.Product
 @{
     ViewBag.Title = "Product Details";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
 }
 
 <h2>Product Details</h2>
@@ -68,3 +68,4 @@
 
 @Html.ActionLink("Edit", "Edit", new { id=Model.ProductID }, new { @class = "btn btn-success btnStyle" })
 @Html.ActionLink("Back To List", "index", new { controller = "products" }, new { @class = "btn btn-primary btnStyle" })
+@*<a class="btn btn-primary" href="/admin/products/index">Back To Products</a>*@
