@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EFDBFirstApproachExample1.Filter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace EFDBFirstApproachExample1.Controllers
 {
     public class HomeController : Controller
     {
+        [MyActionFilter]
         // GET: Home
         public ActionResult Index()
         {
