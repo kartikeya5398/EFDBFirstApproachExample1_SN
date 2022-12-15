@@ -299,6 +299,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="CustomValidation\DivisibleBy10Attribute.cs" />
+    <Compile Include="Filter\AdminAuthorization.cs" />
+    <Compile Include="Filter\CustomerAuthorization.cs" />
+    <Compile Include="Filter\ManagerAuthorization.cs" />
+    <Compile Include="Filter\MyActionFilter.cs" />
+    <Compile Include="Filter\MyAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

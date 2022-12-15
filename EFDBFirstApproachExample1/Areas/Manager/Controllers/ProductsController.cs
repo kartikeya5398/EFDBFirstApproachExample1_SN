@@ -1,4 +1,5 @@
-﻿using EFDBFirstApproachExample1.Models;
+﻿using EFDBFirstApproachExample1.Filter;
+using EFDBFirstApproachExample1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace EFDBFirstApproachExample1.Areas.Manager.Controllers
 {
+    [ManagerAuthorization]
     public class ProductsController : Controller
     {
         // GET: Manager/Products  
