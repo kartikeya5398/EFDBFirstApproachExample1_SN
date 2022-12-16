@@ -15,7 +15,8 @@ namespace EFDBFirstApproachExample1.Controllers
     {
         // GET: Account/Register
         [HttpGet]
-        public ActionResult Register()
+        [ActionName("Register")]
+        public ActionResult RegistrationPage()
         {
             return View();
         }
@@ -40,9 +41,7 @@ namespace EFDBFirstApproachExample1.Controllers
                     userManager.AddToRole(user.Id, "Customer");
 
                     //login
-                    var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                    var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                    authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+                    this.LoginUser(userManager, user);
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -75,9 +74,7 @@ namespace EFDBFirstApproachExample1.Controllers
             if (user != null)
             {
                 //Login
-                var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+                this.LoginUser(userManager, user);
 
                 if (userManager.IsInRole(user.Id,"Admin"))
                 {
@@ -99,6 +96,14 @@ namespace EFDBFirstApproachExample1.Controllers
                 return View();
             }
             
+        }
+
+        [NonAction]
+        public void LoginUser(ApplicationUserManager userManager, ApplicationUser user)
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+            authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
         }
 
         //GET: Account/Logout
