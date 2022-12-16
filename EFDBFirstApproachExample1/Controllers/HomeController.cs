@@ -10,6 +10,7 @@ namespace EFDBFirstApproachExample1.Controllers
     public class HomeController : Controller
     {
         [MyActionFilter]
+        [MyResultFilter]
         // GET: Home
         public ActionResult Index()
         {

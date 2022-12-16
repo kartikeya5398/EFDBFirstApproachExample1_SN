@@ -13,6 +13,7 @@ namespace EFDBFirstApproachExample1
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilter(GlobalFilters.Filters);
         }
     }
 }

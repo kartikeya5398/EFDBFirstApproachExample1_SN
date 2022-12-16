@@ -63,6 +63,7 @@ namespace EFDBFirstApproachExample1.Controllers
 
         //POST: Account/Login
         [HttpPost]
+        [OverrideExceptionFilters]
         public ActionResult Login(LoginViewModel lvm)
         {
             //Login
