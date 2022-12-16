@@ -18,7 +18,7 @@ namespace EFDBFirstApproachExample1.Models
 
         [Display(Name = "ProductName")]
         [Required(ErrorMessage = "Product Name Required")]
-        [RegularExpression(@"^[A-Za-z 0-9 ]*$", ErrorMessage = "Alphabets Only")]
+        //[RegularExpression(@"^[A-Za-z0-9 ]*$", ErrorMessage = "Alphabets Only")]
         [MaxLength(50, ErrorMessage = "Product Name should not be more than 50 Characters")]
         [MinLength(2, ErrorMessage = "Product Name contains at least 2 characters")]
         public string ProductName { get; set; }
