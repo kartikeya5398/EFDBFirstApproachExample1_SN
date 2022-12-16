@@ -129,6 +129,7 @@ namespace EFDBFirstApproachExample1.Areas.Manager.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,ProductName,Price,DateOfPurchase,AvailabilityStatus,CategoryID,BrandID,Active,Photo")] Product p)
         {
             //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
