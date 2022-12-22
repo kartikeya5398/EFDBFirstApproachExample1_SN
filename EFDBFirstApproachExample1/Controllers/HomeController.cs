@@ -15,6 +15,7 @@ namespace EFDBFirstApproachExample1.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //throw new Exception("Some Exception For testing purpose");        //Lec-108 HandleError
             return View();
         }
     }
