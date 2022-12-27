@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
+using Company.DomainModels;
 using System.Web.Mvc;
 
 namespace EFDBFirstApproachExample1.Controllers

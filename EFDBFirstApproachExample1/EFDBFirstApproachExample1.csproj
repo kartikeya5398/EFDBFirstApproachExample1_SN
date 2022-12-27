@@ -82,8 +82,14 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -100,6 +106,18 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.11.1\lib\net47\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -289,6 +307,8 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
@@ -301,7 +321,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="CustomValidation\DivisibleBy10Attribute.cs" />
     <Compile Include="Filter\AdminAuthorization.cs" />
     <Compile Include="Filter\CustomerAuthorization.cs" />
     <Compile Include="Filter\ManagerAuthorization.cs" />
@@ -339,10 +358,6 @@
       <DependentUpon>202210041142533_UpdateCode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Brand.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CompanyDbContext.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -414,6 +429,32 @@
     <EmbeddedResource Include="Migrations\202210041142533_UpdateCode.resx">
       <DependentUpon>202210041142533_UpdateCode.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Company.DataLayer\Company.DataLayer.csproj">
+      <Project>{b7a4f0fe-51e3-4d06-b254-9db5be07c142}</Project>
+      <Name>Company.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.DomainModels\Company.DomainModels.csproj">
+      <Project>{46881071-7632-44d8-92c6-85d14aceba5f}</Project>
+      <Name>Company.DomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.RepositoryContracts\Company.RepositoryContracts.csproj">
+      <Project>{52de0034-3a86-449c-8e54-19c257e22857}</Project>
+      <Name>Company.RepositoryContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.RepositoryLayer\Company.RepositoryLayer.csproj">
+      <Project>{ad3f5007-9945-4c08-a047-ab43e02dd0bf}</Project>
+      <Name>Company.RepositoryLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.ServiceContracts\Company.ServiceContracts.csproj">
+      <Project>{ae6f34ac-1918-4227-8eab-cfc6f2351b26}</Project>
+      <Name>Company.ServiceContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.ServiceLayer\Company.ServiceLayer.csproj">
+      <Project>{b8ef69de-25c7-4ccd-bf36-b23bdbf27f8c}</Project>
+      <Name>Company.ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

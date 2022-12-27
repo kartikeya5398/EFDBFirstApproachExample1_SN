@@ -1,10 +1,12 @@
 ﻿using EFDBFirstApproachExample1.Filter;
-using EFDBFirstApproachExample1.Models;
+//using EFDBFirstApproachExample1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Company.DomainModels;
+using Company.DataLayer;
 
 namespace EFDBFirstApproachExample1.Areas.Manager.Controllers
 {
