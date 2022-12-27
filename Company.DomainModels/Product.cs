@@ -1,14 +1,14 @@
-﻿using EFDBFirstApproachExample1.CustomValidation;
+﻿using Company.DomainModels.CustomValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EFDBFirstApproachExample1.Models
+namespace Company.DomainModels
 {
-    //[Table("Products",Schema ="dbo")]
     public class Product
     {
         [Key]
@@ -31,7 +31,7 @@ namespace EFDBFirstApproachExample1.Models
 
         [Display(Name = "Date Of Purchase")]
         //[Required(ErrorMessage = "Date Of Purchase Required")]
-        [Column("DateOfPurchase", TypeName="datetime")]
+        [Column("DateOfPurchase", TypeName = "datetime")]
         //[DisplayFormat(DataFormatString = "d/M/yyyy", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateOfPurchase { get; set; }
 
@@ -57,4 +57,5 @@ namespace EFDBFirstApproachExample1.Models
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }
     }
+
 }

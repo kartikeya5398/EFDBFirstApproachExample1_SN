@@ -1,10 +1,15 @@
-﻿using EFDBFirstApproachExample1.Models;
+﻿//using EFDBFirstApproachExample1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Company.DomainModels;
 using EFDBFirstApproachExample1.Filter;
+using Company.DataLayer;
+using Company.DomainModels;
+using Company.ServiceLayer;
+using Company.ServiceContracts;
 
 namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
 {
@@ -12,14 +17,20 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
             // GET: Admin/Products  
-            CompanyDbContext db = new CompanyDbContext();
+            CompanyDbContext db;
+            IProductsService productsService;
+        public ProductsController(IProductsService pService)
+        {
+            this.db = new CompanyDbContext();
+            this.productsService = pService;
+        }
             // GET: Products
             public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass = "fa-sort-asc", int PageNo = 1)
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
                 ViewBag.search = search;
-                List<Product> products = db.Products.Where(temp => temp.ProductName.Contains(search)).ToList();
-
+                //List<Product> products = db.Products.Where(temp => temp.ProductName.Contains(search)).ToList();
+                List<Product> products = productsService.SearchProducts(search);
 
                 //Sorting 
                 ViewBag.sortCol = SortColumn;
@@ -116,7 +127,8 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
             public ActionResult Details(long id)
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
-                Product p = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                //Product p = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                Product p = productsService.GetProductByProductID(id);
                 return View(p);
             }
 
@@ -153,8 +165,9 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
                             file.InputStream.Read(imgBytes, 0, file.ContentLength);*/
                         }
                     }
-                    db.Products.Add(p);
-                    db.SaveChanges();
+                    //db.Products.Add(p);
+                    //db.SaveChanges();
+                    productsService.InsertProduct(p);
                     return RedirectToAction("Index");
 
                 }
@@ -180,7 +193,8 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
             public ActionResult Edit(long id)
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
-                Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                //Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                Product existingProduct = productsService.GetProductByProductID(id);
                 ViewBag.category = db.Categories.ToList();
                 ViewBag.brands = db.Brands.ToList();
                 return View(existingProduct);
@@ -219,7 +233,8 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
                             file.InputStream.Read(imgBytes, 0, file.ContentLength);*/
                         }
                     }
-                    db.SaveChanges();
+                    //db.SaveChanges();
+                    productsService.UpdateProduct(existingProduct);
                 }
                     
                     return RedirectToAction("Index", "Products");
@@ -229,7 +244,8 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
             public ActionResult Delete(long id)
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
-                Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                //Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                Product existingProduct = productsService.GetProductByProductID(id);
                 return View(existingProduct);
             }
 
@@ -237,9 +253,10 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
             public ActionResult Delete(long id, Product p)
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
-                Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
-                db.Products.Remove(existingProduct);
-                db.SaveChanges();
+                //Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+                //db.Products.Remove(existingProduct);
+                //db.SaveChanges();
+                productsService.DeleteProduct(id);
                 return RedirectToAction("Index", "Products");
             }
     }

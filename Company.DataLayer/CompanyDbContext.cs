@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
 //using EFDBFirstApproachExample1.Migrations;
+//using EFDBFirstApproachExample1.Models;
+using Company.DomainModels;
 
-namespace EFDBFirstApproachExample1.Models
+namespace Company.DataLayer
 {
     public class CompanyDbContext : DbContext
     {
