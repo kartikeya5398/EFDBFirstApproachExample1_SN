@@ -135,7 +135,7 @@ namespace EFDBFirstApproachExample1.Areas.Admin.Controllers
             public ActionResult Create()
             {
                 //EFDBFirstDatabaseEntities db = new EFDBFirstDatabaseEntities();
-                ViewBag.categories = db.Categories.ToList();
+                ViewData["Categories"]= db.Categories.ToList();
                 ViewBag.brands = db.Brands.ToList();
                 return View();
             }

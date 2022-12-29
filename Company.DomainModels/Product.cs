@@ -25,7 +25,7 @@ namespace Company.DomainModels
 
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Price must be Required")]
-        [Range(0, 100000, ErrorMessage = "Price should be in between 0 and 100000")]
+        [Range(0, 1000000, ErrorMessage = "Price should be in between 0 and 1000000")]
         [DivisibleBy10(ErrorMessage = "Price should be in Multiple of 10")]
         public Nullable<decimal> Price { get; set; }
 
